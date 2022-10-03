@@ -1,33 +1,29 @@
 package winterfox.advancedagriculture.block;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.Material;
+import net.minecraftforge.common.Tags;
+import winterfox.advancedagriculture.registry.ItemRegistry;
 
-public class AASimpleCropBlock extends CropBlock {
+public class CoalCropBlock extends CropBlock {
 
-    public static int MAX_AGE;
-    public static IntegerProperty AGE;
-    public static Block farmland;
-    public static Item seeds;
-
-    public AASimpleCropBlock(Properties props, int maxAge, IntegerProperty age, Block farmland, Item seeds) {
-        super(props);
-        this.MAX_AGE = maxAge;
-        this.AGE = age;
-        this.farmland = farmland;
-        this.seeds = seeds;
+    public static int MAX_AGE = 7;
+    public static IntegerProperty AGE = IntegerProperty.create("age", 0, 6);
+    public CoalCropBlock() {
+        super(Block.Properties.of(Material.STONE).instabreak().noCollission().randomTicks().sound(SoundType.STONE));
     }
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return seeds;
+        return ItemRegistry.COAL_SEEDS.get();
     }
 
     @Override
@@ -52,6 +48,6 @@ public class AASimpleCropBlock extends CropBlock {
 
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter getter, BlockPos pos) {
-        return state.is(farmland);
+        return state.is(Tags.Blocks.STONE);
     }
 }

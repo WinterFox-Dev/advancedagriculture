@@ -14,7 +14,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 import winterfox.advancedagriculture.AdvancedAgriculture;
-import winterfox.advancedagriculture.block.AASimpleCropBlock;
+import winterfox.advancedagriculture.block.CoalCropBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class BlockRegistry {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, AdvancedAgriculture.MODID);
 
     public static final RegistryObject<Block> COAL_CROP = BLOCKS.register("coal_crop",
-            () -> new AASimpleCropBlock(Block.Properties.of(Material.STONE).instabreak().noCollission().randomTicks().sound(SoundType.STONE), 7, IntegerProperty.create("age", 0, 6), Blocks.STONE, ItemRegistry.COAL_SEEDS.get()));
+            () -> new CoalCropBlock());
 
     @SubscribeEvent
     public static void onRegisterItems(final RegisterEvent event) {
