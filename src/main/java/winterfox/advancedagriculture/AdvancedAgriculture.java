@@ -10,8 +10,8 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import winterfox.advancedagriculture.registry.BlockRegistry;
 import winterfox.advancedagriculture.registry.ItemRegistry;
+import winterfox.advancedagriculture.util.ModProperties;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(AdvancedAgriculture.MODID)
 public class AdvancedAgriculture
 {
@@ -22,8 +22,9 @@ public class AdvancedAgriculture
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
-        BlockRegistry.BLOCKS.register(modEventBus);
         ItemRegistry.ITEMS.register(modEventBus);
+        BlockRegistry.BLOCKS.register(modEventBus);
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -40,5 +41,9 @@ public class AdvancedAgriculture
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ClientModEvents
     {
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            ModProperties.setRenderLayers();
+        }
     }
 }
